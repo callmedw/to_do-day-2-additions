@@ -37,5 +37,18 @@ describe(Task) do
     end
   end
 
+  describe("#delete") do
+    it("deletes a list's tasks from the database") do
+      list = List.new({:name => "Epicodus stuff", :id => nil})
+      list.save()
+      task = Task.new({:description => "learn SQL", :list_id => list.id()})
+      task.save()
+      task2 = Task.new({:description => "Review Ruby", :list_id => list.id()})
+      task2.save()
+      list.delete()
+      expect(Task.all()).to(eq([]))
+    end
+  end
+
 
 end
